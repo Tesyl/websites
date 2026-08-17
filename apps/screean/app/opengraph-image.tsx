@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import {
   HEADLINE,
@@ -13,21 +15,29 @@ import {
 // kept away from the edges, because several of them round the corners and
 // iMessage crops tighter than the rest.
 //
-// TYPEFACE: this renders through Satori, which has no access to system
-// fonts — it uses only what is handed to it, and falls back to the sans
-// that next/og bundles. The site's mono stack (`ui-monospace`, SF Mono,
-// JetBrains Mono) is all system fonts, so there is no file here to embed
-// and matching the site's typography would mean vendoring a font.
+// TYPEFACE: Satori has no access to system fonts — it renders only what is
+// handed to it. The site's stack names JetBrains Mono first, so that is
+// what gets embedded here, from @fontsource/jetbrains-mono (SIL OFL 1.1,
+// redistributable). The latin subset is ~28KB per weight.
 //
-// Rather than half-match it, the card leans on the parts of the Acid
-// vocabulary that survive a font substitution: ink ground, chartreuse
-// block, hairline keylines, the offset shadow, wide uppercase tracking.
-// If exact mono ever matters more than a hermetic build, vendor
-// JetBrains Mono (SIL OFL) and pass it via the `fonts` option.
+// The files are vendored under assets/fonts and read as a plain path.
+// Resolving them out of node_modules instead hands Turbopack a specifier it
+// tries to bundle as a browser module, which fails with `Unknown module
+// type`. A filesystem read never reaches the bundler. See the README there.
+//
+// Note WOFF, not WOFF2: Satori supports ttf/otf/woff and cannot decode
+// woff2. Fontsource ships both; picking the wrong one fails at build.
 
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 export const alt = `${PACKAGE_NAME} — ${HEADLINE}`;
+
+// Read at build time — the route is statically prerendered, so this runs
+// once during `next build` and never per request.
+const fontFile = (weight: 400 | 700): Buffer =>
+  readFileSync(
+    join(process.cwd(), 'assets/fonts', `jetbrains-mono-latin-${weight}-normal.woff`),
+  );
 
 const INK = '#0b0b0b';
 const CREAM = '#f4eeda';
@@ -47,6 +57,7 @@ const Image = () =>
           justifyContent: 'space-between',
           background: INK,
           padding: 64,
+          fontFamily: 'JetBrains Mono',
         }}
       >
         {/* Top rule: brand mark + package name */}
@@ -63,7 +74,7 @@ const Image = () =>
           <div
             style={{
               display: 'flex',
-              fontSize: 26,
+              fontSize: 24,
               fontWeight: 700,
               letterSpacing: 6,
               color: CREAM,
@@ -76,7 +87,7 @@ const Image = () =>
           <div
             style={{
               display: 'flex',
-              fontSize: 20,
+              fontSize: 19,
               letterSpacing: 3,
               color: ACCENT,
             }}
@@ -94,8 +105,8 @@ const Image = () =>
               alignSelf: 'flex-start',
               background: ACCENT,
               color: INK,
-              fontSize: 76,
-              fontWeight: 800,
+              fontSize: 50,
+              fontWeight: 700,
               letterSpacing: -1,
               padding: '14px 26px',
               border: `3px solid ${CREAM}`,
@@ -111,7 +122,7 @@ const Image = () =>
               display: 'flex',
               marginTop: 46,
               maxWidth: 900,
-              fontSize: 27,
+              fontSize: 21,
               lineHeight: 1.45,
               color: CREAM,
               opacity: 0.85,
@@ -131,11 +142,11 @@ const Image = () =>
             paddingTop: 24,
           }}
         >
-          <div style={{ display: 'flex', fontSize: 22, color: ACCENT }}>$</div>
+          <div style={{ display: 'flex', fontSize: 19, color: ACCENT }}>$</div>
           <div
             style={{
               display: 'flex',
-              fontSize: 22,
+              fontSize: 19,
               letterSpacing: 1,
               color: CREAM,
             }}
@@ -145,7 +156,13 @@ const Image = () =>
         </div>
       </div>
     ),
-    size,
+    {
+      ...size,
+      fonts: [
+        { name: 'JetBrains Mono', data: fontFile(400), weight: 400, style: 'normal' },
+        { name: 'JetBrains Mono', data: fontFile(700), weight: 700, style: 'normal' },
+      ],
+    },
   );
 
 export default Image;
