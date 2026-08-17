@@ -4,16 +4,18 @@ Frontend sites for tesyl libraries.
 
 ```
 apps/
-  hapi/        Next.js 16 site for @tesyl/hapi
+  hapi/        Next.js 16 site for @tesyl/hapi           :3100
+  screean/     Next.js 16 site for @tesyl/screean-components  :3200
 packages/
   content/     Shared, typed page content — one source per library
+brand/         Generated PNGs that have to exist as files (GitHub previews)
 ```
 
 ## Running it
 
 ```bash
 pnpm install
-pnpm dev        # turbo runs every app; hapi is on http://localhost:3100
+pnpm dev        # turbo runs every app: hapi :3100, screean :3200
 pnpm build      # static export of every app
 pnpm typecheck
 ```
@@ -22,6 +24,34 @@ pnpm typecheck
 
 Next.js 16 (App Router), React 19, Tailwind 4, TypeScript 5.9, pnpm workspaces, Turborepo.
 Every page prerenders as static content — a docs site has no reason to run a server.
+
+## The screean site
+
+Documents `@tesyl/screean-components` — a headless component library whose components are
+real DOM elements that dissolve into particle clouds and reform.
+
+| Route | What it is |
+|---|---|
+| `/` | Landing. The hero is a live particle field that binds the wordmark |
+| `/docs/*` | 10 pages in the same three tiers as hapi |
+| `/components` | Storybook grid — nine groups of live particle demos, one group mounted at a time |
+
+The design is **Acid**: cream ground, electric chartreuse, mono throughout, 2px radii,
+hairline borders and solid offset shadows. It was ported wholesale from the showcase site in
+`../screean-components/site`, so `app/globals.css` is that stylesheet nearly verbatim.
+
+Two things about it are load-bearing:
+
+- **Only one storybook group is mounted at a time.** Each tile owns a particle stage with its
+  own canvas and force stack; mounting every group meant ~26 simultaneous stages, past the
+  browser's per-page WebGL context limit of roughly 16.
+- **Every canvas needs a teardown.** Tiles return `{ stage, timer, dispose }` and all three run
+  on unmount, in that order — a stage disposed before its owner's disposer leaves the disposer
+  touching a dead renderer.
+
+Code samples in the docs are verified: `apps/screean/docs-verify` compiles every documented
+sample against the **published** package types, and runs as part of `pnpm typecheck`. It has
+already caught an option that did not exist in the published tarball and two wrong defaults.
 
 ## The hapi site
 
@@ -65,9 +95,11 @@ page is one object plus one slug in `DOC_GROUPS` — previous/next, the "on this
 
 ## Why there is still no `packages/ui`
 
-There is a shared **content** package and no shared **component** package. With one site there is
-nothing to share yet; a `ui` package starts to earn its place at the second site, when a real
-duplicate appears. Extracting one before that just moves code further from where it is read.
+There is a shared **content** package and no shared **component** package. The second site has
+now landed and has produced no real duplicate: hapi is IBM Plex on light ground with chroma
+reserved for syntax, screean is mono-and-chartreuse brutalism. They share a content *model*, not
+components. The share-card font loaders are the closest thing to a duplicate and they differ on
+purpose — see `brand/README.md`. A `ui` package still has nothing to hold.
 
 ## Conventions worth keeping
 
@@ -89,16 +121,25 @@ duplicate appears. Extracting one before that just moves code further from where
 
 ## Deploying
 
-The hapi site is `hapi.tesyl.tech`. It is a static Next build, so any host that
-serves the output works.
+Both sites are static Next builds, so any host that serves the output works.
 
-On Vercel the two settings that matter are:
+Each app is a **separate Vercel project** pointed at the same repository. The setting that
+matters is the root directory — everything else is inherited.
 
-| Setting | Value |
-|---|---|
-| Root directory | `apps/hapi` |
-| Build command | `pnpm build` (inherited) |
+| Site | Domain | Root directory |
+|---|---|---|
+| hapi | `hapi.tesyl.tech` | `apps/hapi` |
+| screean | `screean.tesyl.tech` | `apps/screean` |
 
-`SITE_URL` needs no value in production — `https://hapi.tesyl.tech` is the
-default, so share cards resolve even when the build has no environment. Set it
-only on a preview deploy whose cards should point at itself.
+`SITE_URL` needs no value in production — each app defaults to its own real domain, so share
+cards resolve even when the build has no environment. Set it only on a preview deploy whose
+cards should point at itself. It is deliberately **not** `NEXT_PUBLIC_`: it is read server-side
+only, by the layout metadata, the sitemap and robots.txt.
+
+Two things to get right on a fresh Vercel project:
+
+- **Root directory must be the app, not the repo root.** Pointed at the root, Vercel builds
+  the workspace and finds no Next app to serve.
+- **Do not enable "Include files outside the root directory" off.** The build needs
+  `packages/content` and the lockfile above it; Vercel handles this by default for pnpm
+  workspaces, but the setting exists and turning it off breaks the build.
