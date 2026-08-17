@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { PACKAGE_NAME, PACKAGE_REPO, PACKAGE_VERSION } from '@tesyl/content/hapi';
+import { Mark } from './Mark';
 
 export function Bar({ active }: { active: 'landing' | 'docs' | 'article' | 'mascot' }) {
   return (
     <header className="bar">
       <div className="bar__in">
         <Link href="/" className="tab mono">
+          <Mark size={17} />
           {PACKAGE_NAME}
         </Link>
         <Link href="/" className="tab" data-on={active === 'landing'}>

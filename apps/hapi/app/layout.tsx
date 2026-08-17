@@ -18,12 +18,35 @@ const mono = IBM_Plex_Mono({
   display: 'swap',
 });
 
+/**
+ * Absolute URLs are required for share cards — a relative og:image is ignored
+ * by every scraper. Set SITE_URL at deploy time; the fallback keeps local
+ * builds working.
+ */
+const SITE_URL = process.env['SITE_URL'] ?? 'http://localhost:3100';
+
+const TITLE = `${PACKAGE_NAME} — ${PACKAGE_TAGLINE}`;
+const DESCRIPTION =
+  'Declare an endpoint once. Every way of calling it — hook, promise, mutation, infinite query — comes back typed, validated, and cancellable.';
+
 export const metadata: Metadata = {
-  title: {
-    default: `${PACKAGE_NAME} — ${PACKAGE_TAGLINE}`,
-    template: `%s — ${PACKAGE_NAME}`,
+  metadataBase: new URL(SITE_URL),
+  title: { default: TITLE, template: `%s — ${PACKAGE_NAME}` },
+  description: DESCRIPTION,
+  openGraph: {
+    type: 'website',
+    siteName: PACKAGE_NAME,
+    title: TITLE,
+    description: DESCRIPTION,
+    url: '/',
   },
-  description: PACKAGE_TAGLINE,
+  twitter: {
+    // Messages and Slack both read this; summary_large_image is what makes the
+    // card render wide instead of as a thumbnail beside the text.
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

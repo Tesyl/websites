@@ -39,27 +39,12 @@ export function Twoslash({ size = 96, onDark = false }: MarkProps) {
 }
 
 /**
- * 02 — Marker
- *
- * No face at all: the highlighter stroke from the headline, curved. It is the
- * one element the brand already owns, so this costs nothing new — but it only
- * reads as a smile once you have seen it next to the wordmark.
+ * 02 — Marker — CHOSEN. Lives in app/Mark.tsx now; re-exported so this sheet
+ * still records what was compared.
  */
-export function Marker({ size = 96, onDark = false }: MarkProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 100 100" role="img" aria-label="hapi">
-      <path
-        d="M16 50 Q50 88 84 50"
-        stroke={YELLOW}
-        strokeWidth="19"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <circle cx="34" cy="30" r="6" fill={onDark ? '#f5f6fa' : INK} />
-      <circle cx="66" cy="30" r="6" fill={onDark ? '#f5f6fa' : INK} />
-    </svg>
-  );
-}
+import { Mark as Marker } from '../Mark';
+
+export { Marker };
 
 /**
  * 03 — Chip
