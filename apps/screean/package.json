@@ -1,0 +1,32 @@
+{
+  "name": "@tesyl/site-screean",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Website for @tesyl/screean and @tesyl/screean-components.",
+  "scripts": {
+    "dev": "next dev --port 3200",
+    "build": "next build",
+    "start": "next start --port 3200",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rm -rf .next .turbo node_modules *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@tesyl/content": "workspace:*",
+    "@tesyl/screean": "^0.3.0",
+    "@tesyl/screean-components": "^0.3.0",
+    "next": "^16.3.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "happy-dom": "^20.9.0",
+    "typescript": "^5.9.0",
+    "vitest": "^2.1.8"
+  }
+}

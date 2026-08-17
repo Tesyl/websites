@@ -11,7 +11,7 @@ export function Bar({ active }: { active: 'landing' | 'docs' | 'article' }) {
         <Link href="/" className="tab" data-on={active === 'landing'}>
           overview.tsx
         </Link>
-        <Link href="/docs" className="tab" data-on={active === 'docs'}>
+        <Link href="/docs/overview" className="tab" data-on={active === 'docs'}>
           docs.mdx
         </Link>
         <Link href="/article" className="tab" data-on={active === 'article'}>

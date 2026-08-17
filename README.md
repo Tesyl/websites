@@ -28,7 +28,7 @@ Every page prerenders as static content — a docs site has no reason to run a s
 | Route | What it is |
 |---|---|
 | `/` | Landing. The hero is a live editor pane: hover any identifier to read its inferred type |
-| `/docs` | Reference, six sections |
+| `/docs/*` | 18 pages in three tiers — see below |
 | `/article` | Long-form design notes — ergonomics, readability, and the closures underneath |
 
 The direction is **Quick Info**: the page behaves like an editor, because type inference is what
@@ -38,6 +38,30 @@ Styles are scoped under `.site` in `app/site.css`.
 Four other directions were built and compared before this one was chosen — Patchbay, Field Guide,
 Ledger, and Broadcast. They were removed in the commit that promoted this one and remain in git
 history if you want to look back at them.
+
+## Docs structure
+
+Modelled on TanStack Query's information architecture, which is the best-organised
+documentation in this corner of the ecosystem.
+
+| Tier | For | Pages |
+|---|---|---|
+| Getting started | Orienting | Overview, Installation, Quick start, TypeScript |
+| Guides & concepts | Learning one idea at a time | Important defaults, Endpoints, Calling, Validation, Errors, Cancellation, Cache keys, Hooks, Headers |
+| API reference | Looking something up | createApi, createEndpoint, Endpoint members, createFetcher, Error guards |
+
+Three patterns worth keeping:
+
+- **One concept per page.** A page you can read in three minutes gets read.
+- **Important defaults leads the guides.** TanStack does this and it is their single best
+  idea — a default you discover during an incident is a bad default.
+- **API pages have a fixed shape**: signature, then options as `name · type · Required ·
+  defaults to`, then returns. Consistency is what makes a reference scannable.
+
+Pages are data, not JSX. `packages/content/src/docs-*.ts` holds the writing as typed
+`DocBlock` unions; `app/docs/DocBlocks.tsx` is the only file that knows about markup. Adding a
+page is one object plus one slug in `DOC_GROUPS` — previous/next, the "on this page" rail, and
+`generateStaticParams` all follow from that.
 
 ## Why there is still no `packages/ui`
 

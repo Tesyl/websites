@@ -24,7 +24,7 @@ export default function LandingPage() {
             </h1>
             <p className="lede">{SUBHEAD}</p>
             <div className="row-cta">
-              <Link href="/docs" className="btn btn--go">
+              <Link href="/docs/overview" className="btn btn--go">
                 Read the docs
               </Link>
               <a href={PACKAGE_REPO} className="btn">
