@@ -20,10 +20,13 @@ const mono = IBM_Plex_Mono({
 
 /**
  * Absolute URLs are required for share cards — a relative og:image is ignored
- * by every scraper. Set SITE_URL at deploy time; the fallback keeps local
- * builds working.
+ * by every scraper.
+ *
+ * The production domain is the default rather than an env var, so a card built
+ * anywhere still points somewhere real. Override SITE_URL on a preview deploy
+ * if you want its cards to point at itself.
  */
-const SITE_URL = process.env['SITE_URL'] ?? 'http://localhost:3100';
+const SITE_URL = process.env['SITE_URL'] ?? 'https://hapi.tesyl.tech';
 
 const TITLE = `${PACKAGE_NAME} — ${PACKAGE_TAGLINE}`;
 const DESCRIPTION =

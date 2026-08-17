@@ -86,3 +86,19 @@ duplicate appears. Extracting one before that just moves code further from where
 2. Rename the package to `@tesyl/site-<name>` and give it its own dev port.
 3. Add `packages/content/src/<name>.ts` and export it from the package `exports` map.
 4. `pnpm install`.
+
+## Deploying
+
+The hapi site is `hapi.tesyl.tech`. It is a static Next build, so any host that
+serves the output works.
+
+On Vercel the two settings that matter are:
+
+| Setting | Value |
+|---|---|
+| Root directory | `apps/hapi` |
+| Build command | `pnpm build` (inherited) |
+
+`SITE_URL` needs no value in production — `https://hapi.tesyl.tech` is the
+default, so share cards resolve even when the build has no environment. Set it
+only on a preview deploy whose cards should point at itself.
