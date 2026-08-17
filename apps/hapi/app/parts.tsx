@@ -1,18 +1,21 @@
 import Link from 'next/link';
 import { PACKAGE_NAME, PACKAGE_REPO, PACKAGE_VERSION } from '@tesyl/content/hapi';
 
-export function Bar({ active }: { active: 'landing' | 'docs' }) {
+export function Bar({ active }: { active: 'landing' | 'docs' | 'article' }) {
   return (
     <header className="bar">
       <div className="bar__in">
-        <Link href="/2" className="tab mono">
+        <Link href="/" className="tab mono">
           {PACKAGE_NAME}
         </Link>
-        <Link href="/2" className="tab" data-on={active === 'landing'}>
+        <Link href="/" className="tab" data-on={active === 'landing'}>
           overview.tsx
         </Link>
-        <Link href="/2/docs" className="tab" data-on={active === 'docs'}>
+        <Link href="/docs" className="tab" data-on={active === 'docs'}>
           docs.mdx
+        </Link>
+        <Link href="/article" className="tab" data-on={active === 'article'}>
+          design-notes.md
         </Link>
         <span className="bar__sp" />
         <span className="bar__meta mono">
@@ -61,7 +64,7 @@ export function Foot() {
         {PACKAGE_NAME} v{PACKAGE_VERSION} · MIT
       </span>
       <span className="mono">
-        <a href={PACKAGE_REPO}>github</a> · <Link href="/">other directions</Link>
+        <a href={PACKAGE_REPO}>github</a> · <Link href="/article">the write-up</Link>
       </span>
     </footer>
   );

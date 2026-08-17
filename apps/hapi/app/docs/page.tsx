@@ -1,15 +1,14 @@
 import { DOCS_SECTIONS } from '@tesyl/content/hapi';
-import { Switcher } from '../../_review/Switcher';
-import { Foot, Rack } from '../parts';
+import { Bar, Foot } from '../parts';
 
-export default function PatchbayDocs() {
+export default function DocsPage() {
   return (
     <>
-      <Rack active="docs" />
+      <Bar active="docs" />
 
       <div className="wrap docs">
-        <nav className="side" aria-label="On this page">
-          <p className="side__t mono">On this page</p>
+        <nav className="tree" aria-label="Contents">
+          <p className="tree__t mono">Contents</p>
           {DOCS_SECTIONS.map((s) => (
             <a key={s.id} href={`#${s.id}`}>
               {s.title}
@@ -26,11 +25,9 @@ export default function PatchbayDocs() {
                 <p key={para.slice(0, 32)}>{para}</p>
               ))}
               {s.code ? (
-                <div className="codewrap">
-                  {s.codeLabel ? (
-                    <div className="codewrap__label mono">{s.codeLabel}</div>
-                  ) : null}
-                  <pre className="code">{s.code}</pre>
+                <div className="filebar">
+                  <div className="filebar__n mono">{s.codeLabel ?? 'example'}</div>
+                  <pre className="snip">{s.code}</pre>
                 </div>
               ) : null}
             </section>
@@ -39,7 +36,6 @@ export default function PatchbayDocs() {
       </div>
 
       <Foot />
-      <Switcher current={1} docs />
     </>
   );
 }

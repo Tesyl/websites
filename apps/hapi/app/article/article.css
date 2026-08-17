@@ -1,0 +1,233 @@
+/* Long-form reading layout.
+   Same palette and faces as the rest of the site, but the measure narrows and
+   the type grows: this page is read, not scanned. */
+
+.site .art {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding-inline: clamp(1.25rem, 5vw, 2rem);
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) 6rem;
+}
+
+.site .art__kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 1.1rem;
+}
+
+.site .art__h1 {
+  font-size: clamp(2.1rem, 5.5vw, 3.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.site .art__deck {
+  font-size: clamp(1.05rem, 2.2vw, 1.28rem);
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin: 0 0 1.8rem;
+  font-weight: 400;
+}
+
+.site .art__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.1rem;
+  font-size: 0.8rem;
+  color: var(--ink-3);
+  padding-block: 0.9rem;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.site .art h2 {
+  font-size: clamp(1.4rem, 3.2vw, 1.85rem);
+  letter-spacing: -0.028em;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 3rem 0 0.35rem;
+  scroll-margin-top: 4rem;
+}
+
+.site .art h2 + .art__sub {
+  color: var(--ink-3);
+  font-size: 0.88rem;
+  margin: 0 0 1.4rem;
+}
+
+.site .art h3 {
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  margin: 2rem 0 0.6rem;
+}
+
+.site .art p {
+  font-size: 1.06rem;
+  line-height: 1.72;
+  color: #23283a;
+  margin: 0 0 1.15rem;
+}
+
+.site .art a {
+  color: var(--blue);
+}
+
+.site .art strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.site .art code:not(pre code) {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.88em;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.08em 0.32em;
+  color: var(--teal);
+}
+
+.site .art pre {
+  margin: 1.5rem 0;
+  background: #12141c;
+  color: #dfe3ee;
+  border-radius: 7px;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  font-size: 0.79rem;
+  line-height: 1.7;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.site .art pre b {
+  color: #9dd0ff;
+  font-weight: 400;
+}
+
+.site .art pre i {
+  color: #7f8aa8;
+  font-style: normal;
+}
+
+.site .art pre u {
+  color: #ffb37a;
+  text-decoration: none;
+}
+
+.site .art figure {
+  margin: 1.5rem 0;
+}
+
+.site .art figcaption {
+  font-size: 0.8rem;
+  color: var(--ink-3);
+  line-height: 1.5;
+  margin-top: 0.55rem;
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--rule);
+}
+
+.site .art blockquote {
+  margin: 2rem 0;
+  padding: 0 0 0 1.4rem;
+  border-left: 3px solid var(--blue);
+}
+
+.site .art blockquote p {
+  font-size: 1.22rem;
+  line-height: 1.45;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.014em;
+  margin: 0;
+}
+
+.site .art ul,
+.site .art ol {
+  margin: 0 0 1.15rem;
+  padding-left: 1.3rem;
+}
+
+.site .art li {
+  font-size: 1.04rem;
+  line-height: 1.68;
+  color: #23283a;
+  margin-bottom: 0.5rem;
+}
+
+.site .art hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 3rem 0;
+}
+
+/* A callout for the one genuinely surprising thing in each section. */
+.site .art .aside {
+  background: #f4f6fd;
+  border: 1px solid #d9e0f7;
+  border-radius: 7px;
+  padding: 1.1rem 1.2rem;
+  margin: 1.8rem 0;
+}
+
+.site .art .aside p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.site .art .aside p + p {
+  margin-top: 0.7rem;
+}
+
+.site .art .aside__t {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* Contents rail, hidden until there is room beside the column. */
+.site .art__toc {
+  display: none;
+}
+
+@media (min-width: 82rem) {
+  .site .art__toc {
+    display: block;
+    position: fixed;
+    top: 7rem;
+    left: calc(50% - 36rem);
+    width: 13rem;
+    font-size: 0.82rem;
+  }
+
+  .site .art__toc p {
+    font-size: 0.66rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 0.6rem;
+  }
+
+  .site .art__toc a {
+    display: block;
+    padding: 0.28rem 0;
+    color: var(--ink-2);
+    text-decoration: none;
+    line-height: 1.35;
+  }
+
+  .site .art__toc a:hover {
+    color: var(--blue);
+  }
+}

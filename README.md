@@ -23,17 +23,27 @@ pnpm typecheck
 Next.js 16 (App Router), React 19, Tailwind 4, TypeScript 5.9, pnpm workspaces, Turborepo.
 Every page prerenders as static content — a docs site has no reason to run a server.
 
-## Why there is no `packages/ui`
+## The hapi site
 
-There is a shared **content** package and deliberately no shared **component** package.
+| Route | What it is |
+|---|---|
+| `/` | Landing. The hero is a live editor pane: hover any identifier to read its inferred type |
+| `/docs` | Reference, six sections |
+| `/article` | Long-form design notes — ergonomics, readability, and the closures underneath |
 
-The hapi app currently holds five competing design directions at `/1` … `/5`. They exist to be
-compared, so they must not share visual primitives — a shared button or card would pull all five
-towards one house style and the comparison would stop meaning anything.
+The direction is **Quick Info**: the page behaves like an editor, because type inference is what
+the library sells. Light ground, IBM Plex Sans and Mono, and chroma reserved entirely for syntax.
+Styles are scoped under `.site` in `app/site.css`.
 
-Each direction is scoped under its own `[data-design="N"]` attribute with its own stylesheet and
-its own font pairing. Nothing crosses between them. Once a direction is chosen, delete the other
-four and promote the survivor; that is the point at which a `packages/ui` starts to earn its place.
+Four other directions were built and compared before this one was chosen — Patchbay, Field Guide,
+Ledger, and Broadcast. They were removed in the commit that promoted this one and remain in git
+history if you want to look back at them.
+
+## Why there is still no `packages/ui`
+
+There is a shared **content** package and no shared **component** package. With one site there is
+nothing to share yet; a `ui` package starts to earn its place at the second site, when a real
+duplicate appears. Extracting one before that just moves code further from where it is read.
 
 ## Conventions worth keeping
 

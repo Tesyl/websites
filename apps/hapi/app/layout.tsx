@@ -1,29 +1,37 @@
 import type { Metadata } from 'next';
-import { Chivo, JetBrains_Mono } from 'next/font/google';
+import { IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import { PACKAGE_NAME, PACKAGE_TAGLINE } from '@tesyl/content/hapi';
 import './globals.css';
+import './site.css';
 
-const shellSans = Chivo({
+const sans = IBM_Plex_Sans({
   subsets: ['latin'],
-  variable: '--font-shell',
+  weight: ['400', '500', '600'],
+  variable: '--font-sans',
   display: 'swap',
 });
 
-const shellMono = JetBrains_Mono({
+const mono = IBM_Plex_Mono({
   subsets: ['latin'],
-  variable: '--font-shell-mono',
+  weight: ['400', '500'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: `${PACKAGE_NAME} — design directions`,
+  title: {
+    default: `${PACKAGE_NAME} — ${PACKAGE_TAGLINE}`,
+    template: `%s — ${PACKAGE_NAME}`,
+  },
   description: PACKAGE_TAGLINE,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${shellSans.variable} ${shellMono.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+      <body>
+        <div className="site">{children}</div>
+      </body>
     </html>
   );
 }
