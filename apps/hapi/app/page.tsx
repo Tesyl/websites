@@ -20,7 +20,7 @@ export default function LandingPage() {
           <div>
             <p className="kicker mono">inference, not annotation</p>
             <h1 className="h1">
-              The types are already <u>there</u>.
+              Hapi types, <u>happy life</u>…
             </h1>
             <p className="lede">{SUBHEAD}</p>
             <div className="row-cta">

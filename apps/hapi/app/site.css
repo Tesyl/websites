@@ -15,6 +15,10 @@
   --teal: #0b7285;
   --pink: #c2255c;
   --amber: #a26a00;
+  /* Marker yellow. Bright enough to read as a highlighter, light enough to
+     keep dark text on top of it legible — it sits behind type, never in it. */
+  --highlight: #ffe066;
+  --highlight-deep: #f59f00;
 
   background: var(--paper);
   color: var(--ink);
@@ -117,12 +121,22 @@
   letter-spacing: -0.035em;
   font-weight: 600;
   margin: 0 0 1.3rem;
-  max-width: 15ch;
+  max-width: 18ch;
+  /* Break after the comma rather than mid-phrase, so the marker stroke stays
+     on one line instead of splitting across two. */
+  text-wrap: balance;
 }
 
 .site .h1 u {
   text-decoration: none;
-  background: linear-gradient(transparent 62%, #c7d2fe 62%);
+  /* Drawn a touch taller and rounded at the ends, so it reads as a hand-drawn
+     marker stroke rather than a filled rectangle. */
+  background-image: linear-gradient(var(--highlight), var(--highlight));
+  background-repeat: no-repeat;
+  background-size: 100% 0.42em;
+  background-position: 0 88%;
+  border-radius: 2px;
+  padding-inline: 0.06em;
 }
 
 .site .lede {
