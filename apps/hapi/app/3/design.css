@@ -1,0 +1,457 @@
+/* Direction 03 — Field Guide
+   Eight failure modes, keyed and labelled like specimens. Bone and moss, with
+   oxblood reserved for the terminal cases. Deliberately not the cream-and-
+   terracotta default: the ground is cool, the accent is blood, not clay. */
+
+[data-design='3'] {
+  --bone: #eae6da;
+  --bone-2: #e2ddce;
+  --card: #f3f0e8;
+  --ink: #2f3b2f;
+  --ink-2: #55604f;
+  --ink-3: #857f6d;
+  --moss: #7d8c6a;
+  --blood: #8c2f2f;
+  --sand: #c9b896;
+  --rule: #cec7b4;
+
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--font-d3-body), Georgia, serif;
+  min-height: 100dvh;
+}
+
+[data-design='3'] .display {
+  font-family: var(--font-d3), Georgia, serif;
+}
+
+[data-design='3'] .mono {
+  font-family: var(--font-d3-mono), ui-monospace, monospace;
+}
+
+[data-design='3'] .wrap {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+/* ---- plate header ---- */
+
+[data-design='3'] .plate {
+  border-bottom: 2px solid var(--ink);
+  background: var(--bone);
+}
+
+[data-design='3'] .plate__in {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+  padding-block: 1rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+[data-design='3'] .plate__name {
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+}
+
+[data-design='3'] .plate__name span {
+  font-style: italic;
+  color: var(--ink-2);
+}
+
+[data-design='3'] .plate__nav {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+[data-design='3'] .plate__nav a {
+  color: var(--ink-2);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+
+[data-design='3'] .plate__nav a:hover,
+[data-design='3'] .plate__nav a[data-on='true'] {
+  color: var(--ink);
+  border-bottom-color: var(--blood);
+}
+
+/* ---- hero ---- */
+
+[data-design='3'] .hero {
+  padding-block: clamp(3rem, 7vw, 5rem) clamp(2rem, 4vw, 3rem);
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+}
+
+@media (min-width: 60rem) {
+  [data-design='3'] .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+[data-design='3'] .taxon {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin: 0 0 1.1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+[data-design='3'] .h1 {
+  font-size: clamp(2.4rem, 6vw, 3.9rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  margin: 0 0 1.2rem;
+}
+
+[data-design='3'] .h1 i {
+  color: var(--blood);
+}
+
+[data-design='3'] .lede {
+  color: var(--ink-2);
+  line-height: 1.7;
+  font-size: 1.04rem;
+  max-width: 46ch;
+  margin: 0 0 1.8rem;
+}
+
+[data-design='3'] .cta {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+[data-design='3'] .cta a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--blood);
+  padding-bottom: 3px;
+}
+
+[data-design='3'] .cta a:hover {
+  color: var(--blood);
+}
+
+[data-design='3'] .spec {
+  margin-top: 1.9rem;
+  font-size: 0.8rem;
+  color: var(--ink-3);
+  border-left: 2px solid var(--sand);
+  padding-left: 0.9rem;
+}
+
+/* ---- the signature: the dichotomous key ---- */
+
+[data-design='3'] .key {
+  border: 1px solid var(--ink);
+  background: var(--card);
+  padding: 1.4rem;
+  box-shadow: 4px 4px 0 var(--bone-2);
+}
+
+[data-design='3'] .key__t {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin: 0 0 0.3rem;
+}
+
+[data-design='3'] .key__s {
+  font-size: 0.82rem;
+  color: var(--ink-3);
+  margin: 0 0 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+  font-style: italic;
+}
+
+[data-design='3'] .step {
+  display: grid;
+  grid-template-columns: 2.1rem 1fr;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  align-items: baseline;
+  border-bottom: 1px dotted var(--rule);
+}
+
+[data-design='3'] .step:last-child {
+  border-bottom: 0;
+}
+
+[data-design='3'] .step__n {
+  font-size: 0.74rem;
+  color: var(--moss);
+  letter-spacing: 0.04em;
+}
+
+[data-design='3'] .step__q {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+[data-design='3'] .step__a {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  color: var(--ink);
+}
+
+[data-design='3'] .step__a b {
+  color: var(--blood);
+  font-weight: 600;
+}
+
+/* ---- specimen sheet ---- */
+
+[data-design='3'] .sec {
+  padding-block: clamp(2.75rem, 6vw, 4.5rem);
+  border-top: 1px solid var(--rule);
+}
+
+[data-design='3'] .sec__t {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+  flex-wrap: wrap;
+}
+
+[data-design='3'] .h2 {
+  font-size: clamp(1.5rem, 3.2vw, 2.15rem);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+[data-design='3'] .sec__n {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+[data-design='3'] .specimens {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+
+[data-design='3'] .card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  padding: 1.1rem;
+  position: relative;
+}
+
+[data-design='3'] .card__no {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.9rem;
+  font-size: 0.68rem;
+  color: var(--ink-3);
+}
+
+[data-design='3'] .card__latin {
+  font-size: 0.82rem;
+  color: var(--blood);
+  font-style: italic;
+  margin: 0 0 0.15rem;
+}
+
+[data-design='3'] .card__t {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  padding-right: 2rem;
+}
+
+[data-design='3'] .card__c {
+  font-size: 0.83rem;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin: 0 0 0.7rem;
+}
+
+[data-design='3'] .card__row {
+  font-size: 0.72rem;
+  color: var(--ink-3);
+  border-top: 1px solid var(--rule);
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+[data-design='3'] .card__row b {
+  font-weight: 400;
+  color: var(--moss);
+}
+
+[data-design='3'] .habits {
+  display: grid;
+  gap: 1.6rem 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+}
+
+[data-design='3'] .habit h3 {
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin: 0 0 0.45rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+[data-design='3'] .habit p {
+  color: var(--ink-2);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin: 0 0 0.7rem;
+}
+
+[data-design='3'] pre.snip {
+  margin: 0;
+  background: #ddd8c8;
+  border: 1px solid var(--rule);
+  padding: 0.7rem 0.85rem;
+  overflow-x: auto;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: #3c453a;
+  font-family: var(--font-d3-mono), ui-monospace, monospace;
+}
+
+[data-design='3'] .foot {
+  border-top: 2px solid var(--ink);
+  padding-block: 1.6rem 5rem;
+  font-size: 0.78rem;
+  color: var(--ink-3);
+  display: flex;
+  justify-content: space-between;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+[data-design='3'] .foot a {
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--sand);
+}
+
+/* ---- docs ---- */
+
+[data-design='3'] .docs {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding-block: 2.2rem 6rem;
+  align-items: start;
+}
+
+@media (min-width: 60rem) {
+  [data-design='3'] .docs {
+    grid-template-columns: 13rem minmax(0, 1fr);
+  }
+}
+
+[data-design='3'] .index {
+  position: sticky;
+  top: 2rem;
+}
+
+[data-design='3'] .index__t {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin: 0 0 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+[data-design='3'] .index a {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: 0.86rem;
+}
+
+[data-design='3'] .index a::after {
+  content: attr(data-n);
+  color: var(--ink-3);
+  font-size: 0.72rem;
+}
+
+[data-design='3'] .index a:hover {
+  color: var(--blood);
+}
+
+[data-design='3'] .doc section {
+  padding-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--rule);
+  scroll-margin-top: 2rem;
+}
+
+[data-design='3'] .doc section:last-child {
+  border-bottom: 0;
+}
+
+[data-design='3'] .doc h2 {
+  font-size: clamp(1.4rem, 2.8vw, 1.85rem);
+  font-weight: 400;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.015em;
+}
+
+[data-design='3'] .doc__b {
+  font-style: italic;
+  color: var(--moss);
+  font-size: 0.85rem;
+  margin: 0 0 1.1rem;
+}
+
+[data-design='3'] .doc p {
+  color: var(--ink-2);
+  line-height: 1.72;
+  max-width: 66ch;
+  margin: 0 0 0.9rem;
+}
+
+[data-design='3'] .fig {
+  margin-top: 1.3rem;
+}
+
+[data-design='3'] .fig figcaption {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.4rem;
+}

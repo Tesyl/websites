@@ -1,0 +1,21 @@
+{
+  "name": "@tesyl/websites",
+  "private": true,
+  "description": "Frontend sites for tesyl libraries.",
+  "packageManager": "pnpm@10.22.0",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "turbo": "^2.10.10",
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

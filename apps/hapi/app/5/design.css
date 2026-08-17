@@ -1,0 +1,441 @@
+/* Direction 05 — Broadcast
+   Swiss poster energy. Scale carries the argument: the eight tags are set as
+   one oversized typographic block you read as a switch statement. Hard grid,
+   four flat colours, no gradients anywhere. */
+
+[data-design='5'] {
+  --black: #0d0d0d;
+  --bone: #f5f2eb;
+  --orange: #ff4d17;
+  --blue: #1d4ed8;
+  --yellow: #facc15;
+  --grey: #6b6862;
+  --rule: #d8d3c8;
+
+  background: var(--bone);
+  color: var(--black);
+  font-family: var(--font-d5), system-ui, sans-serif;
+  min-height: 100dvh;
+}
+
+[data-design='5'] .display {
+  font-family: var(--font-d5-display), Impact, sans-serif;
+  font-weight: 400;
+}
+
+[data-design='5'] .mono {
+  font-family: var(--font-d5-mono), ui-monospace, monospace;
+}
+
+[data-design='5'] .wrap {
+  max-width: 82rem;
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 3vw, 2.5rem);
+}
+
+/* ---- bar ---- */
+
+[data-design='5'] .top {
+  background: var(--black);
+  color: var(--bone);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+[data-design='5'] .top__in {
+  max-width: 82rem;
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 3vw, 2.5rem);
+  padding-block: 0.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+[data-design='5'] .top a {
+  color: inherit;
+  text-decoration: none;
+}
+
+[data-design='5'] .top__nav {
+  display: flex;
+  gap: 1.4rem;
+}
+
+[data-design='5'] .top__nav a:hover,
+[data-design='5'] .top__nav a[data-on='true'] {
+  color: var(--yellow);
+}
+
+/* ---- hero ---- */
+
+[data-design='5'] .hero {
+  padding-block: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 3vw, 2.5rem);
+}
+
+[data-design='5'] .hero__meta {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--grey);
+  border-bottom: 2px solid var(--black);
+  padding-bottom: 0.55rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+[data-design='5'] .hero__meta span:first-child {
+  color: var(--orange);
+}
+
+[data-design='5'] .mega {
+  /* Sized so the whole hero — headline, lede, and buttons — clears a laptop
+     viewport. A poster that pushes its own call to action off-screen is a
+     poster, not a landing page. */
+  font-size: clamp(2.6rem, 9.2vw, 6.6rem);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+[data-design='5'] .mega span {
+  display: block;
+}
+
+[data-design='5'] .mega .o {
+  color: var(--orange);
+}
+
+[data-design='5'] .mega .out {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--black);
+}
+
+[data-design='5'] .hero__grid {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding-top: clamp(1.25rem, 2.5vw, 2rem);
+  border-top: 2px solid var(--black);
+}
+
+@media (min-width: 56rem) {
+  [data-design='5'] .hero__grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  }
+}
+
+[data-design='5'] .lede {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.45;
+  margin: 0;
+  max-width: 40ch;
+  font-weight: 500;
+}
+
+[data-design='5'] .side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  align-items: flex-start;
+}
+
+[data-design='5'] .btn {
+  display: inline-block;
+  background: var(--black);
+  color: var(--bone);
+  padding: 0.75rem 1.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+[data-design='5'] .btn:hover {
+  background: var(--orange);
+}
+
+[data-design='5'] .btn--alt {
+  background: transparent;
+  color: var(--black);
+  box-shadow: inset 0 0 0 2px var(--black);
+}
+
+[data-design='5'] .btn--alt:hover {
+  background: var(--yellow);
+  color: var(--black);
+}
+
+[data-design='5'] .cmd {
+  font-size: 0.78rem;
+  background: var(--black);
+  color: var(--yellow);
+  padding: 0.5rem 0.8rem;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* ---- the signature: the switch, set large ---- */
+
+[data-design='5'] .switchblock {
+  border-top: 2px solid var(--black);
+  border-bottom: 2px solid var(--black);
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+[data-design='5'] .switchblock__t {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin: 0 0 1.2rem;
+}
+
+[data-design='5'] .sw {
+  font-family: var(--font-d5-mono), ui-monospace, monospace;
+  font-size: clamp(0.9rem, 2.1vw, 1.5rem);
+  line-height: 1.5;
+  margin: 0;
+}
+
+[data-design='5'] .sw__line {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 0.6rem;
+  padding: 0.28rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+
+[data-design='5'] .sw__line:last-child {
+  border-bottom: 0;
+}
+
+[data-design='5'] .sw__kw {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+[data-design='5'] .sw__tag {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+[data-design='5'] .sw__hint {
+  display: block;
+  font-family: var(--font-d5), sans-serif;
+  font-size: 0.8rem;
+  color: var(--grey);
+  line-height: 1.4;
+  margin-top: 0.1rem;
+}
+
+@media (min-width: 48rem) {
+  [data-design='5'] .sw__hint {
+    display: inline;
+    margin-left: 0.8rem;
+    font-size: 0.78rem;
+  }
+}
+
+/* ---- sections ---- */
+
+[data-design='5'] .sec {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+[data-design='5'] .sec + .sec {
+  border-top: 2px solid var(--black);
+}
+
+[data-design='5'] .h2 {
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+}
+
+[data-design='5'] .cells {
+  display: grid;
+  gap: 2px;
+  background: var(--black);
+  border: 2px solid var(--black);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+[data-design='5'] .cell {
+  background: var(--bone);
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+[data-design='5'] .cell__n {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--orange);
+}
+
+[data-design='5'] .cell h3 {
+  font-size: 1.15rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+[data-design='5'] .cell p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #3a3833;
+  flex: 1;
+}
+
+[data-design='5'] pre.snip {
+  margin: 0;
+  background: var(--black);
+  color: var(--bone);
+  padding: 0.7rem 0.85rem;
+  overflow-x: auto;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  font-family: var(--font-d5-mono), ui-monospace, monospace;
+}
+
+[data-design='5'] .foot {
+  background: var(--black);
+  color: var(--bone);
+}
+
+[data-design='5'] .foot__in {
+  max-width: 82rem;
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 3vw, 2.5rem);
+  padding-block: 2rem 5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+[data-design='5'] .foot a {
+  color: var(--yellow);
+  text-decoration: none;
+}
+
+/* ---- docs ---- */
+
+[data-design='5'] .docs {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding-block: 2rem 6rem;
+  align-items: start;
+}
+
+@media (min-width: 62rem) {
+  [data-design='5'] .docs {
+    grid-template-columns: 15rem minmax(0, 1fr);
+  }
+}
+
+[data-design='5'] .nav {
+  position: sticky;
+  top: 3.5rem;
+  border: 2px solid var(--black);
+}
+
+[data-design='5'] .nav__t {
+  background: var(--black);
+  color: var(--bone);
+  margin: 0;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+[data-design='5'] .nav a {
+  display: block;
+  padding: 0.5rem 0.8rem;
+  color: var(--black);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--rule);
+}
+
+[data-design='5'] .nav a:last-child {
+  border-bottom: 0;
+}
+
+[data-design='5'] .nav a:hover {
+  background: var(--yellow);
+}
+
+[data-design='5'] .doc section {
+  padding-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 2px solid var(--black);
+  scroll-margin-top: 3.5rem;
+}
+
+[data-design='5'] .doc section:last-child {
+  border-bottom: 0;
+}
+
+[data-design='5'] .doc h2 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 0.98;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  margin: 0 0 0.4rem;
+}
+
+[data-design='5'] .doc__b {
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin: 0 0 1.1rem;
+}
+
+[data-design='5'] .doc p {
+  line-height: 1.68;
+  max-width: 66ch;
+  margin: 0 0 0.9rem;
+  color: #35332e;
+}
+
+[data-design='5'] .doc__code {
+  margin-top: 1.2rem;
+}
+
+[data-design='5'] .doc__code p {
+  margin: 0;
+  max-width: none;
+  background: var(--black);
+  color: var(--yellow);
+  padding: 0.35rem 0.85rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-family: var(--font-d5-mono), ui-monospace, monospace;
+}
