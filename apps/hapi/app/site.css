@@ -54,6 +54,20 @@
   align-items: stretch;
   gap: 0;
   min-height: 2.6rem;
+  /* Five tabs no longer fit on a narrow laptop. Scroll them like an editor
+     does, rather than wrapping — a wrapped tab bar changes height and pushes
+     the page down. */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.site .bar__in::-webkit-scrollbar {
+  display: none;
+}
+
+.site .tab {
+  white-space: nowrap;
+  flex: none;
 }
 
 .site .tab {

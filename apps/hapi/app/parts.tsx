@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { PACKAGE_NAME, PACKAGE_REPO, PACKAGE_VERSION } from '@tesyl/content/hapi';
 
-export function Bar({ active }: { active: 'landing' | 'docs' | 'article' }) {
+export function Bar({ active }: { active: 'landing' | 'docs' | 'article' | 'mascot' }) {
   return (
     <header className="bar">
       <div className="bar__in">
@@ -16,6 +16,9 @@ export function Bar({ active }: { active: 'landing' | 'docs' | 'article' }) {
         </Link>
         <Link href="/article" className="tab" data-on={active === 'article'}>
           design-notes.md
+        </Link>
+        <Link href="/mascot" className="tab" data-on={active === 'mascot'}>
+          mascot.svg
         </Link>
         <span className="bar__sp" />
         <span className="bar__meta mono">

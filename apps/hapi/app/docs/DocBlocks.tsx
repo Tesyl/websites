@@ -1,31 +1,5 @@
 import { headingId, type DocBlock } from '@tesyl/content/docs';
-
-/**
- * Renders a paragraph's inline `code` spans.
- *
- * Content is authored as plain strings with backticks, so the writing stays
- * free of JSX and the renderer stays the only thing that knows about markup.
- */
-function Inline({ text }: { text: string }) {
-  const parts = text.split(/(`[^`]+`|\*\*[^*]+\*\*)/g);
-  return (
-    <>
-      {parts.map((part, i) => {
-        if (part.startsWith('`') && part.endsWith('`') && part.length > 2) {
-          return (
-            <code key={i} className="mono">
-              {part.slice(1, -1)}
-            </code>
-          );
-        }
-        if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
-          return <strong key={i}>{part.slice(2, -2)}</strong>;
-        }
-        return <span key={i}>{part}</span>;
-      })}
-    </>
-  );
-}
+import { Inline } from '../Inline';
 
 export function DocBlocks({ blocks }: { blocks: ReadonlyArray<DocBlock> }) {
   return (
