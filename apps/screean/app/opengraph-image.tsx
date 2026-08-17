@@ -1,5 +1,3 @@
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import {
   HEADLINE,
@@ -7,6 +5,7 @@ import {
   PACKAGE_VERSION,
   SUBHEAD,
 } from '@tesyl/content/screean';
+import { OG_FONT_FAMILY, ogFonts } from './og-font';
 
 // The card that renders when the link is shared — iMessage, Slack, Discord,
 // X, LinkedIn all read `og:image`, which this file generates.
@@ -32,13 +31,6 @@ export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 export const alt = `${PACKAGE_NAME} — ${HEADLINE}`;
 
-// Read at build time — the route is statically prerendered, so this runs
-// once during `next build` and never per request.
-const fontFile = (weight: 400 | 700): Buffer =>
-  readFileSync(
-    join(process.cwd(), 'assets/fonts', `jetbrains-mono-latin-${weight}-normal.woff`),
-  );
-
 const INK = '#0b0b0b';
 const CREAM = '#f4eeda';
 const ACCENT = '#d4ff3a';
@@ -57,7 +49,7 @@ const Image = () =>
           justifyContent: 'space-between',
           background: INK,
           padding: 64,
-          fontFamily: 'JetBrains Mono',
+          fontFamily: OG_FONT_FAMILY,
         }}
       >
         {/* Top rule: brand mark + package name */}
@@ -158,10 +150,7 @@ const Image = () =>
     ),
     {
       ...size,
-      fonts: [
-        { name: 'JetBrains Mono', data: fontFile(400), weight: 400, style: 'normal' },
-        { name: 'JetBrains Mono', data: fontFile(700), weight: 700, style: 'normal' },
-      ],
+      fonts: [...ogFonts()],
     },
   );
 
