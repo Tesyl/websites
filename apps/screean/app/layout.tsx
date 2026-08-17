@@ -5,6 +5,7 @@ import {
   PACKAGE_TAGLINE,
   SUBHEAD,
 } from '@tesyl/content/screean';
+import { SITE_URL } from './constant';
 import { ThemeBoot } from './theme-boot';
 import './globals.css';
 
@@ -12,7 +13,7 @@ import './globals.css';
 // server-rendered paint is correct; ThemeBoot re-applies them on mount so
 // the runtime source of truth stays lib/themes.ts.
 export const metadata: Metadata = {
-  metadataBase: new URL('https://screean.tesyl.dev'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `screean — ${PACKAGE_TAGLINE}`,
     template: '%s — screean',
@@ -28,7 +29,11 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en">
-    <body data-theme="acid" data-theme-id="2">
+    {/* suppressHydrationWarning covers attributes browser extensions inject
+        onto <body> before React hydrates (ColorZilla's cz-shortcut-listen,
+        Grammarly's data-gr-*, and so on). It suppresses attribute mismatches
+        on this element only — children still report normally. */}
+    <body data-theme="acid" data-theme-id="2" suppressHydrationWarning>
       <ThemeBoot />
       <div id="app">{children}</div>
     </body>

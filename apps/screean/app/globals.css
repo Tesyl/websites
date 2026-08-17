@@ -2155,3 +2155,373 @@ body {
 .doc-nav-item.active .doc-nav-count {
   color: var(--fg);
 }
+
+/* ---- Docs -------------------------------------------------------------
+   The docs reuse the components page's .doc-head / .doc-main / .doc-sidebar
+   / .doc-content shell. Everything below is the article body: block kinds
+   from packages/content/src/docs-types.ts that the storybook never needed.
+
+   Same Acid vocabulary throughout — 2px radii, 1.5px hairlines, solid
+   offset shadows, mono everywhere.
+   ---------------------------------------------------------------------- */
+
+/* Sidebar groups. The storybook sidebar is one flat list; the docs sidebar
+   is three titled tiers, so the group label is the only new part. */
+.doc-nav-group + .doc-nav-group {
+  border-top: var(--hairline) solid var(--border);
+}
+.doc-nav-group-title {
+  display: block;
+  padding: 10px 12px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+/* Sidebar entries are links here, not buttons — same grid, minus the
+   trailing count column the storybook uses.
+
+   SCOPED to .doc-nav-group on purpose. `.doc-nav-btn` is shared with the
+   components page, whose sidebar DOES have the count column and needs the
+   three-column `auto 1fr auto` track list from the base rule above. An
+   unscoped override here collapses that third column and breaks the
+   storybook sidebar. */
+.doc-nav-group .doc-nav-btn {
+  grid-template-columns: auto 1fr;
+  text-decoration: none;
+}
+/* `createScreenController` is one unbroken 21-character token and the
+   sidebar is a fixed column, so without an explicit break it runs past
+   the panel edge. The storybook's titles are all short enough that this
+   never came up there. */
+.doc-nav-group .doc-nav-name {
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+}
+
+.doc-article {
+  /* 72ch at 15px lands near the 60-75 character line the
+     legibility research favours; 68ch at 14px was under it. */
+  max-width: 72ch;
+}
+.doc-p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--fg);
+  margin: 0 0 18px;
+}
+.doc-h3 {
+  margin: 40px 0 16px;
+  font-size: 16.5px;
+  letter-spacing: 0.06em;
+  /* Offset so an in-page anchor does not land under the sticky nav. */
+  scroll-margin-top: 84px;
+}
+.doc-list {
+  margin: 0 0 20px;
+  padding-left: 22px;
+  font-size: 15px;
+  line-height: 1.85;
+}
+.doc-list li { margin-bottom: 6px; }
+
+.doc-inline-code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--subtle);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius);
+  padding: 1px 5px;
+  /* Long type signatures must not force the page to scroll sideways. */
+  overflow-wrap: anywhere;
+}
+
+/* ---- Code sample ---- */
+.code-block {
+  margin: 0 0 22px;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 4px 4px 0 var(--accent);
+  overflow: hidden;
+  background: var(--subtle);
+}
+.code-block-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 10px;
+  border-bottom: var(--hairline) solid var(--border);
+  background: var(--surface);
+}
+.code-block-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.code-block-copy {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  padding: 3px 10px;
+  cursor: pointer;
+  color: var(--fg);
+  background: transparent;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.code-block-copy:hover { background: var(--accent); }
+.code-block-copy.copied {
+  background: var(--fg);
+  color: var(--accent);
+}
+.code-block-body {
+  margin: 0;
+  padding: 16px;
+  /* Samples keep their line breaks; long lines scroll in place rather
+     than widening the page. */
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+/* ---- Callout ---- */
+.doc-note {
+  display: block;
+  margin: 0 0 22px;
+  padding: 14px 16px;
+  border: var(--hairline) solid var(--border);
+  border-left-width: 5px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 14.5px;
+  line-height: 1.8;
+}
+.doc-note--info { border-left-color: var(--accent); }
+/* Warnings carry the ink edge — on a cream page the darker rule reads as
+   heavier than the chartreuse without introducing a new hue. */
+.doc-note--warn { border-left-color: var(--fg); background: var(--subtle); }
+.doc-note-title {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---- Table ---- */
+.doc-table-wrap {
+  overflow-x: auto;
+  margin: 0 0 22px;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius);
+}
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.doc-table th,
+.doc-table td {
+  text-align: left;
+  padding: 9px 12px;
+  border-bottom: var(--hairline) solid var(--border);
+  vertical-align: top;
+}
+.doc-table th {
+  background: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+.doc-table tr:last-child td { border-bottom: 0; }
+
+/* ---- API entry ---- */
+.doc-api {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.doc-api-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.doc-api-name {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+}
+.doc-api-type {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.doc-api-tag,
+.doc-api-default {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius);
+}
+.doc-api-tag { background: var(--accent); }
+.doc-api-default { color: var(--muted); }
+.doc-api-body {
+  margin: 0 0 8px;
+  font-size: 14.5px;
+  line-height: 1.8;
+}
+.doc-api-body:last-child { margin-bottom: 0; }
+
+/* ---- On this page ---- */
+.doc-rail {
+  margin: 0 0 26px;
+  padding: 10px 14px;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.doc-rail-title {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.doc-rail ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+/* Chips, not a wrapped word list. On a page with a dozen headings the
+   wrapped list ran together into one sentence — the reader could not tell
+   where one heading stopped and the next began. A bounded box per entry is
+   what makes it scannable. */
+.doc-rail a {
+  display: inline-block;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--fg);
+  text-decoration: none;
+  padding: 3px 8px;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+.doc-rail a:hover { background: var(--accent); }
+
+/* ---- Prev / next ---- */
+.doc-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: var(--hairline) solid var(--border);
+}
+.doc-pager-link {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 14px;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-decoration: none;
+  color: var(--fg);
+  max-width: 46%;
+}
+.doc-pager-link:hover { box-shadow: 4px 4px 0 var(--accent); }
+.doc-pager-next { text-align: right; align-items: flex-end; }
+.doc-pager-dir {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.doc-pager-title { font-size: 13px; font-weight: 700; }
+
+@media (max-width: 720px) {
+  .doc-pager { flex-direction: column; }
+  .doc-pager-link { max-width: 100%; }
+  .doc-pager-next { text-align: left; align-items: flex-start; }
+}
+
+/* ---- Syntax highlighting ----------------------------------------------
+   Prism token colours, tuned for Acid: ink on the cream code surface, with
+   chartreuse reserved for the one thing worth spotting first in a sample —
+   strings and the values you are meant to change.
+
+   Deliberately restrained. A rainbow of hues on a two-colour page reads as
+   a different design; here highlighting is weight and a few ink tints, so
+   the code still looks like it belongs to the rest of the site.
+   ---------------------------------------------------------------------- */
+.code-block-body code { color: var(--fg); }
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--muted);
+  font-style: italic;
+}
+.token.punctuation { color: color-mix(in srgb, var(--fg) 55%, transparent); }
+.token.keyword,
+.token.boolean,
+.token.atrule,
+.token.important {
+  font-weight: 700;
+}
+.token.function,
+.token.class-name,
+.token.selector {
+  font-weight: 700;
+  /* An ink tint rather than a new hue — reads as emphasis, not decoration. */
+  color: color-mix(in srgb, var(--fg) 78%, var(--accent));
+}
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex {
+  /* Darkened chartreuse: the accent at full strength fails contrast on the
+     cream code surface, so it is mixed toward ink until it reads. */
+  color: color-mix(in srgb, var(--accent) 32%, var(--fg));
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+.token.number,
+.token.constant,
+.token.symbol { font-weight: 700; }
+.token.operator,
+.token.entity,
+.token.url { color: var(--muted); }
+.token.property,
+.token.attr-name,
+.token.tag { color: color-mix(in srgb, var(--fg) 82%, transparent); }
+.token.deleted { text-decoration: line-through; }

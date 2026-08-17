@@ -1,0 +1,18 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "jsx": "react-jsx",
+    // The samples are documentation transcribed into a compilable form, so
+    // most bindings exist only to prove a signature accepts them and are
+    // never read. That is the point of the file, not an oversight.
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    // Doc samples are written for readability, not for the app's stricter
+    // optional-property rules — a reader copying `{ min: 0 }` should not be
+    // held to exactOptionalPropertyTypes.
+    "exactOptionalPropertyTypes": false,
+    "noUncheckedIndexedAccess": false
+  },
+  "include": ["."]
+}

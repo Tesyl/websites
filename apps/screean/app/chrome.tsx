@@ -16,6 +16,11 @@ import { NAV_LINKS, PACKAGE_REPO } from '@tesyl/content/screean';
 // Section anchors (the landing page's `01 PRIMITIVES` strip) are not
 // ported — the minimal landing has no anchored sections to point at.
 
+// `/docs` must read as active on `/docs/overview` too, so non-root links
+// match on prefix. `/` would prefix-match everything, so it stays exact.
+const isActive = (pathname: string, href: string): boolean =>
+  href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+
 export const SiteNav = (): React.JSX.Element => {
   const pathname = usePathname();
   return (
@@ -35,7 +40,7 @@ export const SiteNav = (): React.JSX.Element => {
             <Link
               key={l.href}
               href={l.href}
-              className={pathname === l.href ? 'active' : undefined}
+              className={isActive(pathname, l.href) ? 'active' : undefined}
             >
               {l.label}
             </Link>

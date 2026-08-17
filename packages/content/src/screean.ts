@@ -19,15 +19,6 @@ export type Feature = {
   readonly code?: string;
 };
 
-export type DocsSection = {
-  readonly id: string;
-  readonly title: string;
-  readonly blurb: string;
-  readonly body: ReadonlyArray<string>;
-  readonly code?: string;
-  readonly codeLabel?: string;
-};
-
 export const PACKAGE_NAME = '@tesyl/screean-components';
 export const ENGINE_PACKAGE_NAME = '@tesyl/screean';
 export const PACKAGE_VERSION = '0.3.0';
@@ -47,6 +38,7 @@ export const INSTALL_COMMAND =
  *  published yet — add them here when those routes ship. */
 export const NAV_LINKS: ReadonlyArray<NavLink> = [
   { href: '/', label: 'Home' },
+  { href: '/docs', label: 'Docs' },
   { href: '/components', label: 'Components' },
   { href: PACKAGE_REPO, label: 'GitHub', external: true },
 ];
@@ -76,66 +68,11 @@ export const QUICK_START_CODE = `import { headlessButton, createScreenController
   from '@tesyl/screean-components/components'
 
 const screen = createScreenController({ canvas })
-const btn = headlessButton({
-  label: 'DISSOLVE ME',
-  onClick: () => screen.dissolve(btn.element),
-})
-document.body.appendChild(btn.element)`;
 
-export const DOCS_SECTIONS: ReadonlyArray<DocsSection> = [
-  {
-    id: 'install',
-    title: 'Install',
-    blurb: 'Two packages: the components and the engine they run on.',
-    body: [
-      'The engine is a peer dependency, so install it alongside the component library. React and react-dom are optional peers — install them only if you use the ./react subpath.',
-      'Every entry ships as ESM with a blanket ‘use client’ banner. The package is browser-only, so in a server-rendered framework each import must sit behind a client boundary.',
-    ],
-    code: INSTALL_COMMAND,
-    codeLabel: 'shell',
-  },
-  {
-    id: 'entries',
-    title: 'Three entry points',
-    blurb: 'Pick the surface that matches your framework.',
-    body: [
-      'The package root exports the six-ink GPU hero and background.',
-      'The ./components subpath exports the nine vanilla headless factories plus the transition core. This is the framework-agnostic surface.',
-      'The ./react subpath exports component wrappers over those same factories, plus the SixInkBackground component.',
-    ],
-    code: `import { mount } from '@tesyl/screean-components'
-import { headlessButton } from '@tesyl/screean-components/components'
-import { ScreeanButton } from '@tesyl/screean-components/react'`,
-    codeLabel: 'typescript',
-  },
-  {
-    id: 'quick-start',
-    title: 'Quick start',
-    blurb: 'One controller, one component, one dissolve.',
-    body: [
-      'A screen controller owns the particle canvas and the transition timing. Create one per screen and share it across every component on that screen — one engine, many components.',
-      'The activation contract for a discrete component is fixed: flip state, repaint, fire onChange, then dissolve. Dissolving before the repaint captures the old pixels.',
-    ],
-    code: QUICK_START_CODE,
-    codeLabel: 'typescript',
-  },
-  {
-    id: 'components',
-    title: 'The nine factories',
-    blurb: 'Every component the library ships.',
-    body: [
-      'Discrete (rasterize on activation): headlessButton, headlessLabel, headlessCard, headlessCheckbox, headlessToggle, createRadioGroup, headlessImage.',
-      'Continuous (stay live DOM): headlessSlider, headlessTextField. These never rasterize away mid-interaction, because a drag or an IME composition would be destroyed by it.',
-      'Each factory returns a handle carrying the real element, a dispose function, and role-appropriate state accessors.',
-    ],
-  },
-  {
-    id: 'styling',
-    title: 'Styling',
-    blurb: 'Default skin, or your own.',
-    body: [
-      'The default skins are inline and safe inside the rasterizer’s foreignObject context. Pass `unstyled` with your own `className` to take over completely.',
-      'Two constraints come from the rasterizer, not from us. Cross-origin url() assets will not paint into the particle field, and web fonts must be loaded before a dissolve or the captured pixels will show the fallback face.',
-    ],
-  },
-];
+const btn = headlessButton({
+  screen,
+  label: 'DISSOLVE ME',
+  onClick: () => console.log('clicked'),
+})
+
+document.body.appendChild(btn.el)`;
