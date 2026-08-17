@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { PACKAGE_NAME, PACKAGE_TAGLINE } from '@tesyl/content/hapi';
 import { MARK_INK, MARK_PAPER, MARK_YELLOW, markDataUri } from './Mark';
+import { OG_FONT_FAMILY, ogFonts } from './og-font';
 
 export const alt = `${PACKAGE_NAME} — ${PACKAGE_TAGLINE}`;
 export const size = { width: 1200, height: 630 };
@@ -26,19 +27,20 @@ export default function OpengraphImage() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           background: MARK_INK,
+          fontFamily: OG_FONT_FAMILY,
           padding: '72px 80px',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
           {/* Satori renders images, not React SVG components. */}
           <img src={markDataUri({ field: 'transparent', dots: MARK_PAPER })} width={72} height={72} />
-          <span style={{ color: MARK_PAPER, fontSize: 34, letterSpacing: -0.5 }}>
+          <span style={{ color: MARK_PAPER, fontSize: 34, letterSpacing: -0.5, fontWeight: 600 }}>
             {PACKAGE_NAME}
           </span>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <span style={{ color: MARK_PAPER, fontSize: 96, lineHeight: 1.05, letterSpacing: -3 }}>
+          <span style={{ color: MARK_PAPER, fontSize: 96, lineHeight: 1.05, letterSpacing: -3, fontWeight: 600 }}>
             Hapi types,
           </span>
           <div style={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -49,6 +51,7 @@ export default function OpengraphImage() {
                 fontSize: 96,
                 lineHeight: 1.05,
                 letterSpacing: -3,
+                fontWeight: 600,
                 padding: '2px 16px',
                 borderRadius: 8,
               }}
@@ -64,6 +67,6 @@ export default function OpengraphImage() {
         </span>
       </div>
     ),
-    size,
+    { ...size, fonts: [...ogFonts()] },
   );
 }

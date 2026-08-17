@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { PACKAGE_NAME } from '@tesyl/content/hapi';
 import { MARK_INK, MARK_PAPER, MARK_YELLOW, markDataUri } from '../Mark';
+import { OG_FONT_FAMILY, ogFonts } from '../og-font';
 
 /**
  * GitHub's repository social preview.
@@ -25,18 +26,19 @@ export async function GET() {
           justifyContent: 'center',
           gap: 34,
           background: MARK_INK,
+          fontFamily: OG_FONT_FAMILY,
           padding: '0 96px',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 22 }}>
           <img src={markDataUri({ field: 'transparent', dots: MARK_PAPER })} width={80} height={80} />
-          <span style={{ color: MARK_PAPER, fontSize: 40, letterSpacing: -0.5 }}>
+          <span style={{ color: MARK_PAPER, fontSize: 40, letterSpacing: -0.5, fontWeight: 600 }}>
             {PACKAGE_NAME}
           </span>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <span style={{ color: MARK_PAPER, fontSize: 104, lineHeight: 1.04, letterSpacing: -3.5 }}>
+          <span style={{ color: MARK_PAPER, fontSize: 104, lineHeight: 1.04, letterSpacing: -3.5, fontWeight: 600 }}>
             Hapi types,
           </span>
           <div style={{ display: 'flex' }}>
@@ -47,6 +49,7 @@ export async function GET() {
                 fontSize: 104,
                 lineHeight: 1.04,
                 letterSpacing: -3.5,
+                fontWeight: 600,
                 padding: '2px 18px',
                 borderRadius: 10,
               }}
@@ -61,6 +64,6 @@ export async function GET() {
         </span>
       </div>
     ),
-    { width: 1280, height: 640 },
+    { width: 1280, height: 640, fonts: [...ogFonts()] },
   );
 }
