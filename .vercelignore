@@ -1,0 +1,12 @@
+# Keeps `vercel deploy` from uploading the workspace's build output and
+# dependencies. Both projects deploy from Git, where Vercel clones the repo
+# and .gitignore already covers this — but a CLI deploy uploads the working
+# tree, and without this it sends node_modules and every .next directory.
+# That was measured at 2.8GB before this file existed.
+node_modules
+.next
+.turbo
+out
+dist
+*.tsbuildinfo
+.DS_Store
