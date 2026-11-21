@@ -16,6 +16,6 @@
     "clean": "rm -rf .turbo node_modules *.tsbuildinfo"
   },
   "devDependencies": {
-    "typescript": "^5.9.0"
+    "typescript": "^7.0.2"
   }
 }
